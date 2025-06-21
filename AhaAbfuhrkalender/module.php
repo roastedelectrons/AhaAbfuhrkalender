@@ -329,16 +329,24 @@ include_once __DIR__ . '/../libs/WebHookModule.php';
 		{
 			$ladeort  = $this->ReadAttributeString('LocationID');
 
+			$city = $this->ReadPropertyString('City');
+			$street = $this->ReadPropertyString('Street');
+			$houseNumber = $this->ReadPropertyString('HouseNumber');
+			$houseNumberAddon = $this->ReadPropertyString('HouseNumberAddon');
+
+			if ($street == '')
+				return '';
+
 			if ($ladeort == ''){
-				$ladeortID = explode('@', $streetID);
+				$ladeortID = explode('@', $street);
 				$ladeort = $ladeortID[0].'-'.$houseNumber;
 			}
 
 			$data = array(
-				'gemeinde' => $this->ReadPropertyString('City'),
-				'strasse' => $this->ReadPropertyString('Street'),
-				'hausnr' => $this->ReadPropertyString('HouseNumber'),
-				'hausnraddon' => $this->ReadPropertyString('HouseNumberAddon'),
+				'gemeinde' => $city,
+				'strasse' => $street ,
+				'hausnr' => $houseNumber,
+				'hausnraddon' => $houseNumberAddon,
 				'ladeort' => $ladeort,
 				'ical' => 'ICAL Jahresübersicht'
 			);
@@ -350,7 +358,7 @@ include_once __DIR__ . '/../libs/WebHookModule.php';
 			return $ical;
 		}
 
-		private function ParseICAL($ical)
+		private function ParseICAL(string $ical)
 		{
 			$lines = explode("\n", $ical);
 			$dates = array();
