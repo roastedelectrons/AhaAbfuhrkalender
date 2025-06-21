@@ -1,0 +1,18 @@
+{
+    "translations": {
+        "de": {
+            "City": "Gemeinde",
+            "Streets first letter": "Anfangsbuchstabe der Strasse",
+            "Street": "Strasse",
+            "House number": "Hausnummer",
+            "House number addon": "Hausnummerzusatz",
+            "Waste types: ": "Abfallarten: ",
+            "Create variables for date of next collection": "Variablen für Datum der nächsten Abholung anlegen",
+            "Create variables for days until the next collection": "Variablen für Tage bis zur nächsten Abholung anlegen",
+            "Sort variables by date of next collection": "Sortiere Variablen nach Datum der nächsten Abholung",
+            "Update": "Aktualisieren",
+            "Refresh iCal access token": "iCal Zugangstoken erneuern",
+            "Provide dates as iCal-file via webhook (e.g. for WasteManagement Module)": "Termine als iCal-Datei über WebHook bereitstellen (z.B. für Modul Abfallwirtschaft)"
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "id": "{303BB77D-8AF3-0AFA-D565-6FE55F60F406}",
+    "name": "AhaAbfuhrkalender",
+    "type": 3,
+    "vendor": "",
+    "aliases": [
+        "Abfuhrkalender Region Hannover (aha)"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "AHA",
+    "url": ""
+}
