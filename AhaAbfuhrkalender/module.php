@@ -98,18 +98,23 @@ include_once __DIR__ . '/../libs/WebHookModule.php';
 				$days = $this->calulateDays($date[0]);
 
 				$this->MaintainVariable($wasteType.'_Timestamp', $wasteType,VARIABLETYPE_INTEGER,  "~UnixTimestampDate", 1, $this->ReadPropertyBoolean('VariableTimestamp'));
-				if ($this->ReadPropertyBoolean('VariableTimestamp'))
+				if ($this->ReadPropertyBoolean('VariableTimestamp')){
 					$this->SetValue($wasteType.'_Timestamp', strtotime($date[0]));
 
-				if ($this->ReadPropertyBoolean('SortVariables'))
-					IPS_SetPosition($this->GetIDForIdent ($wasteType.'_Timestamp'), 100+$days);
+					if ($this->ReadPropertyBoolean('SortVariables'))
+						IPS_SetPosition($this->GetIDForIdent ($wasteType.'_Timestamp'), 100+$days);
+				}
+
+
 
 				$this->MaintainVariable($wasteType.'_days', $wasteType, VARIABLETYPE_INTEGER, "AhaAbfuhrkalender.Days", 0, $this->ReadPropertyBoolean('VariableDays'));
-				if ($this->ReadPropertyBoolean('VariableDays'))
+				if ($this->ReadPropertyBoolean('VariableDays')){
 					$this->SetValue($wasteType.'_days', $this->calulateDays($date[0]));	
 
-				if ($this->ReadPropertyBoolean('SortVariables'))
-					IPS_SetPosition($this->GetIDForIdent ($wasteType.'_days'), $days);			
+					if ($this->ReadPropertyBoolean('SortVariables'))
+						IPS_SetPosition($this->GetIDForIdent ($wasteType.'_days'), $days);
+				}
+			
 			}
 
 			$this->WriteAttributeString('WasteTypes', implode(", ", $wasteTypes));
