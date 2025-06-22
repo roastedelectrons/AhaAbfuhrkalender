@@ -107,12 +107,12 @@ include_once __DIR__ . '/../libs/WebHookModule.php';
 
 
 
-				$this->MaintainVariable($wasteType.'_days', $wasteType, VARIABLETYPE_INTEGER, "AhaAbfuhrkalender.Days", 0, $this->ReadPropertyBoolean('VariableDays'));
+				$this->MaintainVariable($wasteType.'_Days', $wasteType, VARIABLETYPE_INTEGER, "AhaAbfuhrkalender.Days", 0, $this->ReadPropertyBoolean('VariableDays'));
 				if ($this->ReadPropertyBoolean('VariableDays')){
-					$this->SetValue($wasteType.'_days', $this->calulateDays($date[0]));	
+					$this->SetValue($wasteType.'_Days', $this->calulateDays($date[0]));	
 
 					if ($this->ReadPropertyBoolean('SortVariables'))
-						IPS_SetPosition($this->GetIDForIdent ($wasteType.'_days'), $days);
+						IPS_SetPosition($this->GetIDForIdent ($wasteType.'_Days'), $days);
 				}
 			
 			}

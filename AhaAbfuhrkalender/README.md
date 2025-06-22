@@ -1,67 +1,85 @@
-# ahaAbfuhrkalender
-Beschreibung des Moduls.
+# AhaAbfuhrkalender
+Modul für Symcon zum Auslesen und Anzeigen der Müllabfuhr-Termine für Restabfall, Papier, Leichtverpackungen und Bioabfall der Region Hannover (aha).
 
-### Inhaltsverzeichnis
+**Verfügbare Städte/Gemeinden:** `Barsinghausen`, `Burgdorf`, `Burgwedel`, `Garbsen`, `Gehrden`, `Hannover`, `Hemmingen`, `Isernhagen`, `Laatzen`, `Langenhagen`, `Lehrte`, `Neustadt a. Rbge.`, `Pattensen`, `Ronnenberg`, `Seelze`, `Sehnde`, `Springe`, `Uetze`, `Wedemark`, `Wennigsen`, `Wunstorf`
 
-1. [Funktionsumfang](#1-funktionsumfang)
-2. [Voraussetzungen](#2-voraussetzungen)
-3. [Software-Installation](#3-software-installation)
-4. [Einrichten der Instanzen in IP-Symcon](#4-einrichten-der-instanzen-in-ip-symcon)
-5. [Statusvariablen und Profile](#5-statusvariablen-und-profile)
-6. [WebFront](#6-webfront)
-7. [PHP-Befehlsreferenz](#7-php-befehlsreferenz)
+## Inhaltsverzeichnis
+1. [Funktionsumfang](#funktionsumfang)
+2. [Konfiguration der Instanz](#konfiguration-der-instanz)
+3. [Statusvariablen und Profile](#statusvariablen-und-profile)
+4. [PHP-Befehlsreferenz](#php-befehlsreferenz)
 
-### 1. Funktionsumfang
+## Funktionsumfang
+* Auslesen der Abfuhrtermine der Region Hannover
+* Anzeige der Abfuhrtermine als Variabke
+* Anezige der Tage bis zur nächsten Abfuhr als Variable
+* Bereitstellung der Termine als iCal Link (z.B. zur Verwendung der Darstellungen des Modul Abfallwirtschaft)
 
-*
+## Konfiguration der Instanz
 
-### 2. Voraussetzungen
+|Eigenschaft| Typ| Beschreibung|
+|-----| -----| -----| 
+|City | Select | Gemeinde |
+|StreetsFirstLetter | Select | Anfangsbuchstabe der Strasse |
+|Street | Select | Strasse |
+|HouseNumber | ValidationTextBox | Hausnummer |
+|HouseNumberAddon | ValidationTextBox | Hausnummerzusatz |
+|VariableTimestamp | CheckBox | Variablen für Datum der nächsten Abholung anlegen |
+|VariableDays | CheckBox | Variablen für Tage bis zur nächsten Abholung anlegen |
+|SortVariables | CheckBox | Sortiere Variablen nach Datum der nächsten Abholung |
+|EnableWebHook | CheckBox | Termine als iCal-Datei über WebHook bereitstellen (z.B. für Modul Abfallwirtschaft) |
 
-- IP-Symcon ab Version 7.1
+## Statusvariablen und Profile
 
-### 3. Software-Installation
+|Ident| Typ| Profil| Beschreibung |
+|-----| -----| -----| ----- |
+|Restabfall_Timestamp |int |~UnixTimestampDate |Restabfall |
+|Restabfall_Days |int |AhaAbfuhrkalender.Days |Restabfall |
+|Bioabfall_Timestamp |int |~UnixTimestampDate |Bioabfall |
+|Bioabfall_Days |int |AhaAbfuhrkalender.Days |Bioabfall |
+|Papier_Timestamp |int |~UnixTimestampDate |Papier |
+|Papier_Days |int |AhaAbfuhrkalender.Days |Papier |
+|Leichtverpackungen_Timestamp |int |~UnixTimestampDate |Leichtverpackungen |
+|Leichtverpackungen_Days |int |AhaAbfuhrkalender.Days |Leichtverpackungen |
 
-* Über den Module Store das 'ahaAbfuhrkalender'-Modul installieren.
-* Alternativ über das Module Control folgende URL hinzufügen
+## PHP-Befehlsreferenz
 
-### 4. Einrichten der Instanzen in IP-Symcon
+### GetDates
+```php
+AHA_GetDates( int $InstanceID );
+```
+|Parameter| Typ| Beschreibung |
+|-----| -----| ----- |
+|$InstanceID |int |ID der AhaAbfuhrkalender-Instanz |
 
- Unter 'Instanz hinzufügen' kann das 'ahaAbfuhrkalender'-Modul mithilfe des Schnellfilters gefunden werden.  
-	- Weitere Informationen zum Hinzufügen von Instanzen in der [Dokumentation der Instanzen](https://www.symcon.de/service/dokumentation/konzepte/instanzen/#Instanz_hinzufügen)
+### GetICAL
+```php
+AHA_GetICAL( int $InstanceID );
+```
+|Parameter| Typ| Beschreibung |
+|-----| -----| ----- |
+|$InstanceID |int |ID der AhaAbfuhrkalender-Instanz |
 
-__Konfigurationsseite__:
+### GetIcalLink
+```php
+AHA_GetIcalLink( int $InstanceID );
+```
+|Parameter| Typ| Beschreibung |
+|-----| -----| ----- |
+|$InstanceID |int |ID der AhaAbfuhrkalender-Instanz |
 
-Name     | Beschreibung
--------- | ------------------
-         |
-         |
+### RefreshAccessToken
+```php
+AHA_RefreshAccessToken( int $InstanceID );
+```
+|Parameter| Typ| Beschreibung |
+|-----| -----| ----- |
+|$InstanceID |int |ID der AhaAbfuhrkalender-Instanz |
 
-### 5. Statusvariablen und Profile
-
-Die Statusvariablen/Kategorien werden automatisch angelegt. Das Löschen einzelner kann zu Fehlfunktionen führen.
-
-#### Statusvariablen
-
-Name   | Typ     | Beschreibung
------- | ------- | ------------
-       |         |
-       |         |
-
-#### Profile
-
-Name   | Typ
------- | -------
-       |
-       |
-
-### 6. Visualisierung
-
-Die Funktionalität, die das Modul in der Visualisierung bietet.
-
-### 7. PHP-Befehlsreferenz
-
-`boolean AHA_BeispielFunktion(integer $InstanzID);`
-Erklärung der Funktion.
-
-Beispiel:
-`AHA_BeispielFunktion(12345);`
+### Update
+```php
+AHA_Update( int $InstanceID );
+```
+|Parameter| Typ| Beschreibung |
+|-----| -----| ----- |
+|$InstanceID |int |ID der AhaAbfuhrkalender-Instanz |
